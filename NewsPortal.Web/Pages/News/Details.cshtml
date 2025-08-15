@@ -1,0 +1,25 @@
+﻿@page "{slug}"
+@model NewsPortal.Web.Pages.News.DetailsModel
+@{
+    ViewData["Title"] = Model.Item?.Title ?? "خبر";
+}
+@if (Model.Item is null)
+{
+    <div class="alert alert-danger">خبر یافت نشد.</div>
+}
+else
+{
+    <h3>@Model.Item.Title</h3>
+    <div class="text-muted mb-2">
+        @if (Model.Item.PublishedAt.HasValue)
+        {
+            <span>انتشار: @Model.Item.PublishedAt.Value.LocalDateTime.ToString("yyyy/MM/dd HH:mm")</span>
+        }
+        <span class="ms-3">دسته: @Model.Item.Category?.Name</span>
+    </div>
+    <p class="lead">@Model.Item.Summary</p>
+    <hr />
+    <article>
+        @Html.Raw(Model.Item.Content)
+    </article>
+}

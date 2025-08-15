@@ -1,0 +1,12 @@
+﻿@page "{id:int}"
+@model NewsPortal.Web.Areas.Admin.Pages.News.DeleteModel
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "حذف خبر";
+}
+<h3>حذف خبر</h3>
+<p>آیا از حذف «@Model.Title» مطمئن هستید؟</p>
+<form method="post">
+    <button type="submit" class="btn btn-danger">حذف</button>
+    <a asp-area="Admin" asp-page="/News/Index" class="btn btn-secondary">انصراف</a>
+</form>

@@ -1,0 +1,26 @@
+﻿@page
+@model NewsPortal.Web.Pages.Account.LoginModel
+@{
+    ViewData["Title"] = "ورود";
+}
+<h3>ورود</h3>
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">نام کاربری</label>
+        <input asp-for="Input.UserName" class="form-control" />
+        <span asp-validation-for="Input.UserName" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">رمز عبور</label>
+        <input asp-for="Input.Password" class="form-control" />
+        <span asp-validation-for="Input.Password" class="text-danger"></span>
+    </div>
+    <div class="form-check mb-3">
+        <input asp-for="Input.RememberMe" class="form-check-input" />
+        <label class="form-check-label">مرا به خاطر بسپار</label>
+    </div>
+    <button class="btn btn-primary">ورود</button>
+</form>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

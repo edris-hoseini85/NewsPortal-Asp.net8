@@ -1,0 +1,39 @@
+﻿@page
+@model NewsPortal.Web.Areas.Admin.Pages.News.IndexModel
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "مدیریت اخبار";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3>مدیریت اخبار</h3>
+    <a class="btn btn-success" asp-area="Admin" asp-page="/News/Create">خبر جدید</a>
+</div>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>عنوان</th>
+            <th>دسته</th>
+            <th>انتشار</th>
+            <th>تاریخ</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var n in Model.Items)
+        {
+            <tr>
+                <td>@n.Title</td>
+                <td>@n.Category?.Name</td>
+                <td>@(n.IsPublished ? "منتشر شده" : "پیش‌نویس")</td>
+                <td>@n.CreatedAt.LocalDateTime.ToString("yyyy/MM/dd")</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-primary" asp-area="Admin" asp-page="/News/Edit" asp-route-id="@n.Id">ویرایش</a>
+                    <a class="btn btn-sm btn-danger" asp-area="Admin" asp-page="/News/Delete" asp-route-id="@n.Id">حذف</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

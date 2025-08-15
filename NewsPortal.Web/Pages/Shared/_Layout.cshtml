@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using NewsPortal.Infrastructure.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>@ViewData["Title"] - پورتال خبر</title>
+	<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body class="container py-3">
+	<header class="d-flex justify-content-between align-items-center mb-4">
+		<h2 class="m-0"><a href="/">پورتال خبر</a></h2>
+		<nav class="d-flex gap-3">
+			<a href="/">خانه</a>
+			<a href="/News">اخبار</a>
+			@if (User.IsInRole("Admin"))
+			{
+				<a href="/Admin/News">مدیریت اخبار</a>
+			}
+		</nav>
+		<div>
+			@if (SignInManager.IsSignedIn(User))
+			{
+				<span class="me-2">سلام، @User.Identity?.Name</span>
+				<a class="btn btn-outline-secondary btn-sm" asp-page="/Account/Logout" asp-route-returnUrl="/">خروج</a>
+
+			}
+			else
+			{
+				<a class="btn btn-primary btn-sm" asp-page="/Account/Login">ورود</a>
+				<a class="btn btn-outline-primary btn-sm" asp-page="/Account/Register">ثبت‌نام</a>
+			}
+		</div>
+	</header>
+	<main role="main" class="mb-5">
+		@RenderBody()
+	</main>
+	<footer class="text-center text-muted">© @DateTime.Now.Year - News Portal</footer>
+	<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+	@RenderSection("Scripts", required: false)
+</body>
+</html>

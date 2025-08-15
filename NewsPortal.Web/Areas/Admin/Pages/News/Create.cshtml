@@ -1,0 +1,50 @@
+﻿@page
+@model NewsPortal.Web.Areas.Admin.Pages.News.CreateModel
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+    ViewData["Title"] = "ایجاد خبر";
+}
+
+<h3>ایجاد خبر</h3>
+
+<form method="post" asp-area="Admin" asp-page="/News/Create">
+    <div class="mb-3">
+        <label class="form-label">عنوان</label>
+        <input asp-for="Input.Title" class="form-control" />
+        <span asp-validation-for="Input.Title" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Slug</label>
+        <input asp-for="Input.Slug" class="form-control" />
+        <span asp-validation-for="Input.Slug" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">خلاصه</label>
+        <textarea asp-for="Input.Summary" class="form-control"></textarea>
+        <span asp-validation-for="Input.Summary" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">محتوا</label>
+        <textarea asp-for="Input.Content" class="form-control" rows="8"></textarea>
+        <span asp-validation-for="Input.Content" class="text-danger"></span>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">دسته‌بندی</label>
+        <select asp-for="Input.CategoryId" class="form-select"
+                asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
+            <option value="">انتخاب کنید</option>
+        </select>
+        <span asp-validation-for="Input.CategoryId" class="text-danger"></span>
+    </div>
+    <div class="form-check mb-3">
+        <input class="form-check-input" asp-for="Input.IsPublished" />
+        <label class="form-check-label">انتشار</label>
+    </div>
+    <button class="btn btn-success">ذخیره</button>
+    <a asp-area="Admin" asp-page="/News/Index" class="btn btn-secondary">بازگشت</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
+

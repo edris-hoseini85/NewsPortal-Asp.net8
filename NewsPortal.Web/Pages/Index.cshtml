@@ -1,0 +1,27 @@
+﻿@page
+@model NewsPortal.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "خانه";
+}
+<h3 class="mb-3">آخرین اخبار</h3>
+@if (!Model.Latest.Any())
+{
+    <div class="alert alert-info">خبری موجود نیست.</div>
+}
+else
+{
+    <div class="list-group">
+        @foreach (var n in Model.Latest)
+        {
+            <a class="list-group-item list-group-item-action" asp-page="/News/Details" asp-route-slug="@n.Slug">
+                <div class="d-flex justify-content-between">
+                    <h5 class="mb-1">@n.Title</h5>
+                    <small>@(n.PublishedAt?.LocalDateTime.ToString("yyyy/MM/dd HH:mm"))</small>
+                </div>
+                <p class="mb-1">@n.Summary</p>
+                <small>دسته: @n.Category?.Name</small>
+            </a>
+        }
+    </div>
+}
+
